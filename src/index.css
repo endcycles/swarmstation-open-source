@@ -1,0 +1,246 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Custom animations */
+@keyframes pulse-badge {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes blink-indicator {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes sweep {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Custom component styles */
+@layer components {
+  /* Issue item selected state */
+  .issue-item-selected {
+    transform: scale(0.98);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Issue item with active agent */
+  .issue-item-active {
+    position: relative;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(102, 126, 234, 0.1) 25%,
+      rgba(102, 126, 234, 0.2) 50%,
+      rgba(102, 126, 234, 0.1) 75%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: sweep 3s ease-in-out infinite;
+  }
+
+  /* Agent badge pulse */
+  .agent-badge {
+    animation: pulse-badge 2s ease-in-out infinite;
+  }
+
+  /* Agent indicator blink */
+  .agent-indicator {
+    animation: blink-indicator 1s ease-in-out infinite;
+  }
+
+  /* Custom scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  /* Best practices checkmarks */
+  .best-practice-item {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .best-practice-item::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #48bb78;
+  }
+}
+
+/* Utility extensions */
+@layer utilities {
+  .animate-blink {
+    animation: blink-indicator 1s ease-in-out infinite;
+  }
+  
+  .animate-pulse-badge {
+    animation: pulse-badge 2s ease-in-out infinite;
+  }
+
+  /* Ensure proper height inheritance */
+  .h-inherit {
+    height: inherit;
+  }
+
+  /* Z-index utilities for modals */
+  .z-1000 {
+    z-index: 1000;
+  }
+  
+  .z-2000 {
+    z-index: 2000;
+  }
+}
+
+/* Empty States */
+.empty-state-container {
+  @apply flex flex-col items-center justify-center text-center py-16 px-8;
+  min-height: 300px;
+}
+
+.empty-state-icon {
+  @apply mb-6 opacity-20 transition-opacity hover:opacity-30;
+}
+
+.empty-state-icon svg {
+  @apply w-24 h-24;
+}
+
+.empty-state-title {
+  @apply text-2xl font-light text-white/80 mb-3;
+  letter-spacing: 0.5px;
+}
+
+.empty-state-description {
+  @apply text-sm text-gray-400 max-w-md mx-auto mb-8 leading-relaxed;
+}
+
+.empty-state-action {
+  @apply px-6 py-3 rounded-lg font-medium text-sm transition-all transform hover:scale-105;
+}
+
+.empty-state-action.primary {
+  @apply bg-gradient-to-r from-purple-gradient-start to-purple-gradient-end text-white;
+  @apply hover:shadow-lg hover:shadow-purple-gradient-start/25;
+}
+
+.empty-state-action.secondary {
+  @apply border border-white/20 text-white/80 hover:bg-white/10;
+}
+
+/* Animated gradient border for empty states */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.empty-state-gradient-border {
+  position: relative;
+  padding: 1px;
+  background: linear-gradient(90deg, 
+    rgba(102, 126, 234, 0.3),
+    rgba(118, 75, 162, 0.3),
+    rgba(102, 126, 234, 0.3)
+  );
+  background-size: 200% 100%;
+  animation: gradient-shift 8s ease infinite;
+  border-radius: 0.75rem;
+}
+
+.empty-state-gradient-border > div {
+  @apply bg-secondary rounded-xl;
+}
+
+/* Subtle pulse animation for icons */
+@keyframes pulse-subtle {
+  0%, 100% { opacity: 0.2; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.05); }
+}
+
+.empty-state-icon {
+  animation: pulse-subtle 3s ease-in-out infinite;
+}
+
+/* Fade-in animation */
+.empty-state-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Notification animations */
+@keyframes fade-in {
+  from { 
+    opacity: 0; 
+    transform: translateX(100px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-out {
+  from { 
+    opacity: 1; 
+    transform: translateX(0);
+  }
+  to { 
+    opacity: 0; 
+    transform: translateX(100px);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+.animate-fade-out {
+  animation: fade-out 0.3s ease-out;
+}

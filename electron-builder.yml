@@ -1,0 +1,109 @@
+appId: com.swarmstation.app
+productName: SwarmStation
+copyright: Copyright © 2025 SwarmStation
+directories:
+  output: release
+  buildResources: build-resources
+  app: app
+
+publish:
+  - provider: github
+    owner: endcycles
+    repo: SwarmStation
+
+mac:
+  category: public.app-category.developer-tools
+  icon: assets/icon.icns
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: build-resources/entitlements.mac.plist
+  entitlementsInherit: build-resources/entitlements.mac.plist
+  target:
+    - target: dmg
+      arch:
+        - arm64
+    - target: zip
+      arch:
+        - arm64
+
+dmg:
+  artifactName: ${productName}-${version}-${arch}.dmg
+  title: ${productName} ${version}
+  iconSize: 100
+  contents:
+    - x: 380
+      y: 240
+      type: link
+      path: /Applications
+    - x: 122
+      y: 240
+      type: file
+
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+        - arm64
+  icon: assets/icon.ico
+  publisherName: SwarmStation
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  artifactName: ${productName}-Setup-${version}-${arch}.exe
+  uninstallDisplayName: ${productName}
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+
+files:
+  - index.html
+  - mvp.*.js
+  - mvp.*.css
+  - main.js
+  - preload.js
+  - core/**/*.js # Explicitly include all JS files in core and its subdirectories
+  - core/**/*.d.ts # Include type definitions for development/debugging
+  - node_modules/**/*
+  - "!node_modules/electron/**/*"
+  - "!node_modules/@parcel/**/*"
+  - "!node_modules/@babel/**/*"
+  - "!node_modules/webpack/**/*"
+  - "!node_modules/typescript/**/*"
+  - "!node_modules/tailwindcss/**/*"
+  - "!node_modules/@swc/**/*"
+  - "!node_modules/app-builder-bin/**/*"
+  - "!node_modules/javascript-obfuscator/**/*"
+  - "!node_modules/webpack-obfuscator/**/*"
+  - "!node_modules/electron-builder/**/*"
+  - "!node_modules/vite/**/*"
+  - "!node_modules/@vitejs/**/*"
+  - "!node_modules/@types/**/*"
+  - "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}"
+  - "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}"
+  - "!**/node_modules/*.d.ts"
+  - "!**/node_modules/.bin"
+  - "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}"
+  - "!*.editorconfig"
+  - "!**/._*"
+  - "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}"
+  - "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}"
+  - "!**/{appveyor.yml,.travis.yml,circle.yml}"
+  - "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+
+asarUnpack:
+  - node_modules/@anthropic-ai/claude-code/**/*
+  - core/**/*.js # Explicitly unpack JS files in core and its subdirectories
+
+includeSubNodeModules: false
+
+extraResources:
+  - from: assets/
+    to: assets/
+    filter:
+      - "**/*"
+
+compression: maximum
+npmRebuild: true
+nodeGypRebuild: false

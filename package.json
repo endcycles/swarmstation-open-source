@@ -1,0 +1,80 @@
+{
+  "name": "swarmstation",
+  "version": "0.1.2",
+  "description": "Deploy multiple Claude agents to work on GitHub issues",
+  "main": "main.js",
+  "targets": {
+    "main": false
+  },
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npm run build:tailwind -- --watch\" \"parcel src/index.html --no-cache\" \"wait-on http://localhost:1234 && NODE_ENV=development electron .\"",
+    "build": "npm run build:tailwind && parcel build src/index.html --public-url ./ --dist-dir dist",
+    "build:tailwind": "tailwindcss -i ./src/index.css -o ./dist/tailwind.css",
+    "build:core": "tsc -p core/tsconfig.json && cp core-dist/claude-service.js core/claude-service.js",
+    "build:main": "tsc -p tsconfig.main.json",
+    "electron-dev": "NODE_ENV=development electron .",
+    "electron-prod": "electron .",
+    "build:prod": "npm run build:tailwind && parcel build src/index.html --no-source-maps --dist-dir dist --public-url ./",
+    "package:mac": "./build.sh --platform mac --arch arm64",
+    "package:mac-universal": "./build.sh --platform mac --arch universal",
+    "package:win": "./build.sh --platform win --arch x64",
+    "package:all": "./build.sh --platform all --arch all",
+    "package:minimal": "./build.sh --platform mac --optimization minimal",
+    "package:ultra-minimal": "./build.sh --platform mac --optimization ultra-minimal",
+    "clean": "rm -rf dist dist-electron release app prod-build minimal-build"
+  },
+  "keywords": [
+    "claude",
+    "ai",
+    "github",
+    "automation"
+  ],
+  "author": "SwarmStation Team",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/swarmstation/swarmstation.git"
+  },
+  "bugs": {
+    "url": "https://github.com/swarmstation/swarmstation/issues"
+  },
+  "homepage": "https://github.com/swarmstation/swarmstation#readme",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/claude-code": "^1.0.48",
+    "electron-updater": "^6.6.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.28.0",
+    "@types/node": "^24.0.13",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.21",
+    "babel-loader": "^10.0.0",
+    "concurrently": "^9.2.0",
+    "electron": "^37.2.1",
+    "electron-builder": "^24.13.3",
+    "electron-reloader": "^1.2.3",
+    "javascript-obfuscator": "^4.1.1",
+    "live-server": "^1.2.2",
+    "parcel": "^2.15.4",
+    "path-browserify": "^1.0.1",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3",
+    "vite": "^5.0.8",
+    "wait-on": "^8.0.3",
+    "webpack": "^5.100.1",
+    "webpack-cli": "^6.0.1",
+    "webpack-obfuscator": "^3.5.1"
+  },
+  "build": {
+    "appId": "com.swarmstation.app",
+    "mac": {
+      "target": "dmg"
+    }
+  }
+}

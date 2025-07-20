@@ -1,0 +1,48 @@
+appId: com.swarmstation.app
+productName: SwarmStation
+copyright: Copyright © 2025 SwarmStation
+directories:
+  output: ../release
+  buildResources: ../build-resources
+
+mac:
+  category: public.app-category.developer-tools
+  icon: ../assets/icon.icns
+  hardenedRuntime: true
+  gatekeeperAssess: false
+  entitlements: ../build-resources/entitlements.mac.plist
+  entitlementsInherit: ../build-resources/entitlements.mac.plist
+  target:
+    - target: dmg
+      arch:
+        - arm64
+
+dmg:
+  artifactName: ${productName}-${version}-${arch}.dmg
+  title: ${productName} ${version}
+  iconSize: 100
+  contents:
+    - x: 380
+      y: 240
+      type: link
+      path: /Applications
+    - x: 122
+      y: 240
+      type: file
+
+files:
+  - "**/*"
+  - "!**/*.map"
+  - "!**/test/**"
+  - "!**/tests/**"
+  - "!**/examples/**"
+  - "!**/docs/**"
+  - "!**/*.md"
+  - "!**/.github/**"
+
+asarUnpack:
+  - node_modules/@anthropic-ai/claude-code/**/*
+
+compression: maximum
+npmRebuild: false
+nodeGypRebuild: false

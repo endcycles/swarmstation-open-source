@@ -1,0 +1,128 @@
+node_modules/
+dist/
+out/
+*.log
+.DS_Store
+.env
+.env.local
+swarmstation-test-repo/
+
+release/*
+
+# Git worktrees for agents
+worktrees/
+
+# Build cache
+.parcel-cache/
+
+# Temporary export directories (archived)
+claude_export_*/
+.old_exports/
+
+# Claude sessions (markdown exports)
+claude_sessions/
+**/claude_sessions/
+
+# IDE files
+.vscode/
+.idea/
+
+# Claude configuration
+.claude/
+
+.prompt.txt
+
+# TypeScript build artifacts
+*.js
+*.js.map
+*.d.ts
+*.d.ts.map
+# But keep specific important JS files
+!main.js
+!postcss.config.js
+!tailwind.config.js
+!webpack.*.js
+!test/**/*.js
+
+# Parcel/Webpack build outputs in root
+mvp.*.js
+mvp.*.css
+mvp.*.js.map
+
+# Build directories
+dist/
+core-dist/
+prod-build/
+app/  # Two-package production build output
+build-*/
+release-test/
+public-repo/
+no-ui/
+
+# Test workspaces
+test-workspace/
+.claude-worktrees/
+
+# Temporary and session files
+*.tmp
+*.temp
+.claude-output-*.log
+
+# Additional package files
+package.prod.json
+
+# Old exports and backups
+.old_exports/
+*-backup/
+*-old/
+
+# Archive folder
+ARCHIVE/
+**/ARCHIVE/
+
+# macOS system files
+**/.DS_Store
+.DS_Store
+
+# Large binary files
+*.dmg
+*.pkg
+*.app
+*.exe
+*.deb
+*.AppImage
+
+# Build scripts (keep only essential ones)
+build-*.sh
+!build.sh
+
+# Misc files that shouldn't be tracked
+tailwind.css
+testing-123-overview.md
+vibekanban.md
+rollbackisse.md
+videotomp3.sh
+
+# Test files in root
+test-*.js
+test-*.md
+*.test.js
+*.spec.js
+
+
+# Claude SDK output
+.claude-output-*.log
+.claude-sdk/
+# Sensitive files
+.env
+.env.*
+*.key
+*.pem
+
+# Build cache and temporary files
+.deps-hash
+.electron-builder-cache.yml
+.npmrc
+
+# Scripts that are not needed in repo
+src/cleanup-prs.sh

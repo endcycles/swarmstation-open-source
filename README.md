@@ -200,12 +200,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Powered by [Claude AI](https://claude.ai) for autonomous development
 - Integrates with [GitHub CLI](https://cli.github.com) for repository management
 
-## 📊 Status
-
-SwarmStation is actively maintained and under continuous development. Check our [releases page](https://github.com/yourusername/swarmstation/releases) for the latest updates.
-
 ---
 
 <p align="center">
-  Made with ❤️ by the SwarmStation team
+  Made with ❤️ by the Swarm Station team
 </p>

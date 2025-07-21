@@ -22,7 +22,7 @@ SwarmStation is a desktop application that coordinates multiple Claude AI agents
 
 - Node.js 18 or higher
 - GitHub CLI (`gh`) - [Installation guide](https://cli.github.com/manual/installation)
-- Claude CLI - [Get access](https://claude.ai/cli)
+- Claude CLI - [Get access](https://claude.ai/cli](https://docs.anthropic.com/en/docs/claude-code/setup)
 - GitHub account with repository access
 
 ## 🛠️ Installation
